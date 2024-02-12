@@ -48,6 +48,14 @@ public class ModelServiceImpl implements ModelService {
     }
 
     @Override
+    public Model getByIdWithPerson(Long id) {
+        var model = modelRepo.findByIdWithPerson(id)
+                .orElseThrow(() -> new ModelDoesNotExistException("Model with id=" + id + " was not found!"));
+        log.debug("GET MODEL WITH ID={}", id);
+        return model;
+    }
+
+    @Override
     public List<Model> getByIds(List<Long> idList) {
         var modelList = idList.stream()
                 .map(id -> modelRepo.findById(id).orElseThrow(() ->

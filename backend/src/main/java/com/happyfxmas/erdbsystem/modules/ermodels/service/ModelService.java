@@ -12,6 +12,8 @@ public interface ModelService {
 
     Model getById(Long id);
 
+    Model getByIdWithPerson(Long id);
+
     List<Model> getByIds(List<Long> id);
 
     List<Model> getAllByPerson(Person person);

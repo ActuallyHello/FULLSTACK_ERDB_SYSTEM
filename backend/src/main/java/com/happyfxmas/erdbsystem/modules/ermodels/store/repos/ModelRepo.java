@@ -9,9 +9,18 @@ import org.springframework.stereotype.Repository;
 
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ModelRepo extends JpaRepository<Model, Long> {
+
+    @Query("""
+            select model from Model model
+                inner join fetch model.person person
+            where model.id = :id
+            """)
+    Optional<Model> findByIdWithPerson(Long id);
+
     List<Model> findAllByPerson(Person person);
 
     @Query("""
