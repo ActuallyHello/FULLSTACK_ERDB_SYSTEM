@@ -19,6 +19,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,7 +35,8 @@ import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/models")
+@RequestMapping("${APP_REST_API_PREFIX}/${APP_REST_API_VERSION}/models")
+@CrossOrigin(origins = "${APP_FRONT_URL}")
 public class ModelController {
 
     private final ModelService modelService;
@@ -67,7 +69,7 @@ public class ModelController {
 
     @GetMapping(BY_ID)
     public ResponseEntity<ModelDetailDTO> getModelDetailById(@PathVariable Long id) {
-        var model = modelService.getById(id);
+        var model = modelService.getByIdWithPerson(id);
         var modelDetailDTO = modelEntityRelationFacade.getModelDetailDTOByModel(model);
         return ResponseEntity.ok(modelDetailDTO);
     }

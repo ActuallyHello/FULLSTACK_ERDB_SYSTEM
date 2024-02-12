@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,7 +28,8 @@ import java.util.Map;
 @AllArgsConstructor
 @Slf4j
 @RestController
-@RequestMapping("/positions")
+@RequestMapping("${APP_REST_API_PREFIX}/${APP_REST_API_VERSION}/positions")
+@CrossOrigin(origins = "${APP_FRONT_URL}")
 public class PositionController {
 
     private final PositionService positionService;

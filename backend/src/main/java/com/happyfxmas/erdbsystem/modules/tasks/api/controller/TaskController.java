@@ -1,13 +1,6 @@
 package com.happyfxmas.erdbsystem.modules.tasks.api.controller;
 
-import com.happyfxmas.erdbsystem.externals.exception.LoadTestDataException;
-import com.happyfxmas.erdbsystem.modules.ermodels.exception.response.ModelNotFoundException;
 import com.happyfxmas.erdbsystem.modules.ermodels.service.ModelService;
-import com.happyfxmas.erdbsystem.modules.persons.api.mapper.PersonDTOMapper;
-import com.happyfxmas.erdbsystem.modules.persons.api.mapper.PositionDTOMapper;
-import com.happyfxmas.erdbsystem.modules.persons.api.mapper.TeacherDTOMapper;
-import com.happyfxmas.erdbsystem.modules.persons.exception.response.StudentNotFoundException;
-import com.happyfxmas.erdbsystem.modules.persons.exception.response.TeacherNotFoundException;
 import com.happyfxmas.erdbsystem.modules.persons.service.StudentService;
 import com.happyfxmas.erdbsystem.modules.persons.service.TeacherService;
 import com.happyfxmas.erdbsystem.modules.tasks.api.dtos.TestDataDTO;
@@ -19,12 +12,6 @@ import com.happyfxmas.erdbsystem.modules.tasks.api.dtos.response.TaskWithTestDat
 import com.happyfxmas.erdbsystem.modules.tasks.api.mapper.TaskDTOMapper;
 import com.happyfxmas.erdbsystem.modules.tasks.api.mapper.TaskWithTeacherDTOMapper;
 import com.happyfxmas.erdbsystem.modules.tasks.api.mapper.TaskWithTestDataDTOMapper;
-import com.happyfxmas.erdbsystem.modules.tasks.exception.response.TaskNotFoundException;
-import com.happyfxmas.erdbsystem.modules.tasks.exception.response.TaskServerException;
-import com.happyfxmas.erdbsystem.modules.tasks.exception.service.ConvertEntityToJsonException;
-import com.happyfxmas.erdbsystem.modules.tasks.exception.service.DenormalizeModelCreationException;
-import com.happyfxmas.erdbsystem.modules.tasks.exception.service.TaskCreationException;
-import com.happyfxmas.erdbsystem.modules.tasks.exception.service.TaskDeleteException;
 import com.happyfxmas.erdbsystem.modules.tasks.service.TaskDataGeneratorService;
 import com.happyfxmas.erdbsystem.modules.tasks.service.TaskService;
 import com.happyfxmas.erdbsystem.modules.tasks.service.TaskStudentService;
@@ -35,6 +22,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,13 +32,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/tasks")
+@RequestMapping("${APP_REST_API_PREFIX}/${APP_REST_API_VERSION}/tasks")
+@CrossOrigin(origins = "${APP_FRONT_URL}")
 public class TaskController {
 
     private final TaskService taskService;
