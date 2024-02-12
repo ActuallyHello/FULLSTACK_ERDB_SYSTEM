@@ -4,8 +4,8 @@ package com.happyfxmas.erdbsystem.modules.tasks.service.impl;
 import com.happyfxmas.erdbsystem.modules.ermodels.store.models.Model;
 import com.happyfxmas.erdbsystem.modules.persons.store.models.Person;
 import com.happyfxmas.erdbsystem.modules.persons.store.models.Teacher;
-import com.happyfxmas.erdbsystem.modules.tasks.exception.response.ResultNotFoundException;
 import com.happyfxmas.erdbsystem.modules.tasks.exception.service.ResultCreationException;
+import com.happyfxmas.erdbsystem.modules.tasks.exception.service.ResultDoesNotExistException;
 import com.happyfxmas.erdbsystem.modules.tasks.service.ResultService;
 import com.happyfxmas.erdbsystem.modules.tasks.store.models.Result;
 import com.happyfxmas.erdbsystem.modules.tasks.store.models.Task;
@@ -41,7 +41,7 @@ public class ResultServiceImpl implements ResultService {
     @Override
     public Result getById(Long id) {
         var result = resultRepo.findById(id)
-                .orElseThrow(() -> new ResultNotFoundException("Result with id=" + id + " was not found"));
+                .orElseThrow(() -> new ResultDoesNotExistException("Result with id=" + id + " was not found"));
         log.debug("GET RESULT (ID={})", id);
         return result;
     }
@@ -49,7 +49,7 @@ public class ResultServiceImpl implements ResultService {
     @Override
     public Result getByIdWithModelAndTaskAndTeacher(Long id) {
         var result = resultRepo.findByIdWithModelAndTaskAndTeacher(id)
-                .orElseThrow(() -> new ResultNotFoundException("Result with id=" + id + " was not found"));
+                .orElseThrow(() -> new ResultDoesNotExistException("Result with id=" + id + " was not found"));
         log.debug("GET RESULT (ID={})", id);
         return result;
     }
